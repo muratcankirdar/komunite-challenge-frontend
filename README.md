@@ -13,7 +13,7 @@ For this task, you are required to create a simple todo application that allows 
     - organisms
     - templates
   - pages
-    - home.tsx (page where the home template will be used)
+    - index.tsx (page where the home template will be used)
 
 Please do not access any folder outside of these. Additionally, you are required to use React hooks and Typescript, and you must not stray from the Atomic Design methodology.
 
