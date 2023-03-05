@@ -1,4 +1,4 @@
-# Komünite Front-End Challange
+# Komünite Front-End Challenge
 
 Hey! With this challenge, we want you to demonstrate your proficiency in applying Atomic Design methodology, an important technical skill. This task requires you to create a Todo application using NextJS framework, Tailwind CSS, Atomic Design methodology, and Typescript in React.
 
