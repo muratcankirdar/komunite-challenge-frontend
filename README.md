@@ -19,7 +19,7 @@ Please do not access any folder outside of these. Additionally, you are required
 
 ## Getting Started
 
-To get started, please fork this repository and create a new branch with your name. Once you have completed the task, please share your work with us by sending the link to your forked repository.
+To get started, please fork this repository and create a new branch with your name. Please complete the task within **2 days** and share the link to your forked repository with us.
 
 Ogulcan Turk (ogulcanturk) - ogulcan@komunite.com.tr
 
