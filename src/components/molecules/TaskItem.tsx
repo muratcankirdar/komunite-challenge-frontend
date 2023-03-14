@@ -8,15 +8,29 @@ interface ITaskItemProps {
   }
   removeItem: (id: number) => void;
   toggleItem: (id: number) => void;
+  editItem: (id: number, editText: string) => void;
 }
 
-const TaskItem: React.FC<ITaskItemProps> = ({item, removeItem, toggleItem}) => {
+const TaskItem: React.FC<ITaskItemProps> = ({item, removeItem, toggleItem, editItem}) => {
+  const [edit, setEdit] = React.useState<boolean>(false);
+  const [editText, setEditText] = React.useState<string>(item.text);
+
   return (
     <div key={item.id} className="flex items-center justify-center mb-4">
+
+        {edit ? (
+          <input
+            id="item" type="text" placeholder=""
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+            className="shadow appearance-none border w-96 rounded py-2 px-3 text-gray-700 leading-tight
+          focus:outline-none focus:shadow-outline"
+          />
+        ) : (
       <div
         className={`
         border-2 bg-white shadow-md rounded p-2 flex flex-col w-96 bg-gray-300 hover:cursor-pointer hover:border-blue-500
-        ${item.completed ? 'bg-green-200 border-green-200' : 'bg-gray-300'}`
+        ${item.completed ? 'bg-green-400 border-green-400' : 'bg-gray-300'}`
         }
         onClick={() => toggleItem(item.id)}
       >
@@ -24,8 +38,21 @@ const TaskItem: React.FC<ITaskItemProps> = ({item, removeItem, toggleItem}) => {
           {item.text}
         </p>
       </div>
+        )}
 
-      {!item.completed && (
+      <button onClick={(e) => {
+        e.stopPropagation();
+        setEdit(!edit);
+        if (edit) {
+          editItem(item.id, editText);
+        }
+      }}
+              className="ml-2 bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded border-2 border-blue-400 hover:border-blue-600"
+      >
+        Edit
+      </button>
+
+      {!edit && (
         <button onClick={(e) => {
           e.stopPropagation();
           removeItem(item.id);
@@ -38,7 +65,7 @@ const TaskItem: React.FC<ITaskItemProps> = ({item, removeItem, toggleItem}) => {
           </svg>
         </button>
       )}
-    </div>
+  </div>
   )
 }
 export default TaskItem;

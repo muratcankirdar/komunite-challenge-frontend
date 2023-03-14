@@ -18,12 +18,31 @@ const HomeTemplate = () => {
 
   const addItem = () => {
     if (!text) return;
-
-    setList([...list, { text, id: generateId(), completed: false }]);
+    const updatedList = [...list, { text, id: generateId(), completed: false }];
+    setList(updatedList);
+    localStorage.setItem('list', JSON.stringify(updatedList));
     setText('');
   };
 
+  const editItem = (id: number, editText: string) => {
+    // set list with edited item id
+    const updatedList = list.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          text: editText
+        }
+      }
+      return item;
+    });
+
+    setList(updatedList);
+    localStorage.setItem('list', JSON.stringify(updatedList));
+  }
+
   const removeItem = (id: number) => {
+    const updatedList = list.filter((item) => item.id !== id);
+    localStorage.setItem('list', JSON.stringify(updatedList));
     setList(list.filter((item) => item.id !== id));
   };
 
@@ -44,14 +63,6 @@ const HomeTemplate = () => {
     return Math.floor(Math.random() * 1000000);
   }
 
-  useEffect(() => {
-    // save list to local storage
-    // check if list is not empty while saving
-    if (list.length > 0) {
-      localStorage.setItem('list', JSON.stringify(list));
-    }
-  }, [list]);
-
   // load list from local storage
   useEffect(() => {
     const list = localStorage.getItem('list');
@@ -71,7 +82,7 @@ const HomeTemplate = () => {
       <TaskForm text={text} setText={setText} addItem={addItem} />
 
       {list.map((item: IListItem) => (
-        <TaskItem item={item} removeItem={removeItem} toggleItem={toggleItem} />
+        <TaskItem key={item.id} item={item} removeItem={removeItem} toggleItem={toggleItem} editItem={editItem} />
       ))}
     </div>
   )
