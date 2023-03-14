@@ -74,13 +74,14 @@ const HomeTemplate = () => {
 
   return (
     <div>
-      <div className="p-10 flex justify-center w-full">
-        <Title label="Todo List" />
+      <div className="bg-blue-400 mb-20">
+        <div className="p-10 flex justify-center w-full">
+          <Title label="Todo List" />
+        </div>
+
+        {/* Create TodoList organism */}
+        <TaskForm text={text} setText={setText} addItem={addItem} />
       </div>
-
-      {/* Create TodoList organism */}
-      <TaskForm text={text} setText={setText} addItem={addItem} />
-
       {list.map((item: IListItem) => (
         <TaskItem key={item.id} item={item} removeItem={removeItem} toggleItem={toggleItem} editItem={editItem} />
       ))}
